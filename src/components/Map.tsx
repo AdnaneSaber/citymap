@@ -3,7 +3,7 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, CircleMarker, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { CATEGORY_META, STATUS_LABELS } from "@/models/constants";
 import type { Category, Status } from "@/models/constants";
 

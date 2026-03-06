@@ -1,4 +1,4 @@
-import mongoose, { Schema, models, model } from "mongoose";
+import { Schema, models, model } from "mongoose";
 import { CATEGORIES, STATUSES } from "./constants";
 
 export { CATEGORIES, CATEGORY_META, STATUSES, STATUS_LABELS } from "./constants";
