@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { CATEGORY_META, STATUS_LABELS } from "@/models/Report";
+import { CATEGORY_META, STATUS_LABELS } from "@/models/constants";
 import type { ReportData } from "@/components/Map";
 import MapWrapper from "@/components/MapWrapper";
 

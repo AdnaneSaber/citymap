@@ -5,7 +5,7 @@ import MapWrapper from "@/components/MapWrapper";
 import ReportForm from "@/components/ReportForm";
 import FilterPanel from "@/components/FilterPanel";
 import type { ReportData } from "@/components/Map";
-import type { Category, Status } from "@/models/Report";
+import type { Category, Status } from "@/models/constants";
 
 export default function Home() {
   const [reports, setReports] = useState<ReportData[]>([]);

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { CATEGORY_META, STATUS_LABELS } from "@/models/Report";
+import { CATEGORY_META, STATUS_LABELS } from "@/models/constants";
 import type { ReportData } from "@/components/Map";
 
 export default function MyReportsPage() {

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import imageCompression from "browser-image-compression";
-import { CATEGORIES, CATEGORY_META } from "@/models/Report";
-import type { Category } from "@/models/Report";
+import { CATEGORIES, CATEGORY_META } from "@/models/constants";
+import type { Category } from "@/models/constants";
 
 interface Props {
   position: [number, number];

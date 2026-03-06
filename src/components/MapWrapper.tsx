@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import type { ReportData } from "./Map";
-import type { Category, Status } from "@/models/Report";
+import type { Category, Status } from "@/models/constants";
 
 const Map = dynamic(() => import("./Map"), { ssr: false, loading: () => <div className="h-full w-full bg-gray-100 animate-pulse flex items-center justify-center"><p className="text-gray-400">Chargement de la carte…</p></div> });
 

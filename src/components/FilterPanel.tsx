@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CATEGORIES, CATEGORY_META, STATUSES, STATUS_LABELS } from "@/models/Report";
-import type { Category, Status } from "@/models/Report";
+import { CATEGORIES, CATEGORY_META, STATUSES, STATUS_LABELS } from "@/models/constants";
+import type { Category, Status } from "@/models/constants";
 
 interface Props {
   selectedCategories: Category[];
