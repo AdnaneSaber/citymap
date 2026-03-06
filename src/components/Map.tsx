@@ -16,6 +16,8 @@ L.Icon.Default.mergeOptions({
 });
 
 const KENITRA: [number, number] = [34.261, -6.5802];
+const STORAGE_KEY = "citymap_user_location";
+const PERMISSION_KEY = "citymap_location_granted";
 
 export interface ReportData {
   _id: string;
@@ -43,19 +45,52 @@ function UserLocation() {
 
   useEffect(() => {
     if (!navigator.geolocation) return;
+
+    // Check if we already have a saved location (instant center while GPS warms up)
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const ll = JSON.parse(saved) as [number, number];
+        setPos(ll);
+        map.setView(ll, 15, { animate: true });
+      } catch {}
+    }
+
+    // Check if user previously granted permission
+    const granted = localStorage.getItem(PERMISSION_KEY);
+
+    // Always try to get fresh position (browser remembers permission)
     navigator.geolocation.getCurrentPosition(
       (p) => {
         const ll: [number, number] = [p.coords.latitude, p.coords.longitude];
         setPos(ll);
+        localStorage.setItem(PERMISSION_KEY, "true");
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(ll));
+        map.setView(ll, 15, { animate: true });
       },
-      () => {},
-      { enableHighAccuracy: true }
+      () => {
+        if (!granted) localStorage.setItem(PERMISSION_KEY, "false");
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
     );
+
+    // Listen for "locate me" button
+    const onLocate = (e: Event) => {
+      const ll = (e as CustomEvent).detail as [number, number];
+      setPos(ll);
+      map.setView(ll, 15, { animate: true });
+    };
+    window.addEventListener("citymap:locate", onLocate);
+    return () => window.removeEventListener("citymap:locate", onLocate);
   }, [map]);
 
   if (!pos) return null;
   return (
-    <CircleMarker center={pos} radius={8} pathOptions={{ color: "#4285f4", fillColor: "#4285f4", fillOpacity: 0.8 }}>
+    <CircleMarker
+      center={pos}
+      radius={8}
+      pathOptions={{ color: "#4285f4", fillColor: "#4285f4", fillOpacity: 0.8, weight: 2 }}
+    >
       <Popup>Votre position</Popup>
     </CircleMarker>
   );
